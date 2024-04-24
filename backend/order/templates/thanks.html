@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Order Details</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #5e60ce;
+        --secondary-color: #3da9fc;
+        --background-color: #eff0f3;
+        --title-color: #1e2139;
+        --text-color: #4a4e69;
+      }
+
+      body {
+        background-color: var(--background-color);
+        font-family: Varela Round;
+        color: var(--text-color);
+      }
+
+      .container {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h1.text-success {
+        color: var(--primary-color) !important;
+      }
+
+      h2 {
+        color: var(--title-color);
+      }
+
+      ul.list-unstyled {
+        border-top: 2px solid var(--primary-color);
+        padding-top: 1rem;
+      }
+
+      li.my-2 {
+        line-height: 1.6;
+        font-size: 1.1rem;
+      }
+
+      .font-weight-bold {
+        color: var(--title-color);
+        font-weight: bold;
+      }
+
+      span.text-muted {
+        color: var(--text-color);
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+      }
+
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+      }
+
+      .brand-logo {
+        height: 40px; /* Adjust size as needed */
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="navbar-brand">
+        <h1 class="text-success mb-4">Thank You for Ordering!!!</h1>
+      </div>
+      <h2>Order Details for Order #{{ order.id }}</h2>
+      <ul class="list-unstyled">
+        {% for item in order_items %}
+        <li class="my-2">
+          <span class="font-weight-bold">{{ item.quantity }} x {{ item.product.productName }}</span>
+          at <span class="text-muted">${{ item.price }}</span> each
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="font-weight-bold">
+        Total Order Amount: ${{ order.total_price }}
+      </p>
+      <a href="{% url 'productList' %}" class="btn btn-primary"
+        >Continue Shopping</a>
+    </div>
+  </body>
+</html>
